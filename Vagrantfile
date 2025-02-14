@@ -1,5 +1,4 @@
 Vagrant.configure("2") do |config|
-  config.vm.synced_folder ".", "/vagrant", disabled: true
   config.vm.box_check_update = false
   config.vm.box = "bento/ubuntu-24.04"
 
@@ -15,7 +14,8 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "vbox" do |vbox|
     vbox.vm.hostname = "ubuntu-vm"
-    vbox.vm.network "private_network", ip: "192.168.56.100"
+    vbox.vm.network "private_network", ip: "192.168.56.42"
+    vbox.vm.network "public_network", ip: "192.168.1.42", bridge: "enp3s0"
     vbox.vm.provider "virtualbox" do |vb|
       vb.memory = "8192"
       vb.cpus = 4

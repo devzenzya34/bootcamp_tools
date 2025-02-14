@@ -1,0 +1,21 @@
+#### setup docker on a virtual machine using vaagrant and virtualbox
+
+Vagrant.configure("2") do |config|
+    config.vm.define "docker" do |dk|
+        dk.vm.box = "eazytrainingfr/centos7"
+        dk.vm.box_version = "1.0"
+        dk.vm.network "private_network", type: "dhcp"
+        dk.vm.hostname = "docker"
+        dk.vm.provider "virtualbox" do |v|
+            v.name = "docker"
+            v.memory = 1024
+            v.cpus = 2
+        end
+        dk.vm.provision :shell do |sh|
+            sh.path = 'install_docker.sh'
+            sh.env = { 'ENABLE_ZSH' => ENV['ENABLE_ZSH'] }
+        end
+    end
+end
+
+

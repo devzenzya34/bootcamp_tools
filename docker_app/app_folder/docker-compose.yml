@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  web-student:
+    image: php:apache
+    depends_on:
+      - api-student
+    ports:
+      - 8082:81
+    volumes:
+      - ./website:/var/www/html
+    environment:
+      - USERNAME=admin
+      - PASSWORD=admin
+    networks:
+      - std_network # we can usee the precedent network named "student"
+
+  api-student:
+    image: api-student:v1.0.0
+    volumes:
+      - ./simple_api/student_age.json:/data/student_age.json
+    ports:
+      - 4000:5000
+    networks:
+      - std_network
+
+networks:
+  std_network:
