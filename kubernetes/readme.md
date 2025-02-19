@@ -10,3 +10,5 @@
 ### Stocker la data sur un volume monté
 
 ### Créer un service de type nodeport pour exposer le frontend wordpress
+
+

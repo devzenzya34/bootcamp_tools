@@ -1,8 +1,8 @@
 resources:
     - wp-namespace.yml
     - mysql/service-mysql.yml
-    - mysql/deployment-mysql.yml
-    - mysql/volume-mysql.yml
+    - mysql/deploy-mysql.yml
+    - mysql/pvc-mysql.yml
     - wordpress/service-wordpress.yml
     - wordpress/deployment-wordpress.yml
     - wordpress/volume-wordpress.yml

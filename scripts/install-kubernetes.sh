@@ -3,8 +3,12 @@
 # Exit on any error
 set -e
 
-echo "Starting Kubernetes installation..."
+echo "Install Minikube for local development..."
+MINIKUBE_VERSION="v1.35.0"
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/$MINIKUBE_VERSION/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
 
+echo "Starting Kubernetes installation..."
 # Disable swap
 sudo swapoff -a
 # Comment out swap entries in /etc/fstab

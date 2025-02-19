@@ -1,14 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: wordpress-mysql
-  namespace: wp-k8s
+  name: mysql-svc
   labels:
-    app: wordpress
+    app: mysql
+    tier: database
+  namespace: k8s-wordpress
 spec:
   ports:
     - port: 3306
+      targetPort: 3306
   selector:
-    app: wordpress
-    tier: mysql
-  clusterIP: 10.96.0.11
+    app: mysql
+    tier: database
+  type: ClusterIP
