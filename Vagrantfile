@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "vbox" do |vbox|
     vbox.vm.hostname = "ubuntu-vm"
-    vbox.vm.network "private_network", ip: "192.168.56.42"
+    vbox.vm.network "private_network", type: "static", ip: "192.168.56.42"
     vbox.vm.network "public_network", ip: "192.168.1.42", bridge: "enp3s0"
     vbox.vm.provider "virtualbox" do |vb|
       vb.memory = "8192"

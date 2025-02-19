@@ -18,8 +18,9 @@ spec:
         tier: frontend
     spec:
       containers:
-        - image: wordpress:6.2.1-apache
-          name: wordpress
+        - name: wordpreiss
+          imagePullPolicy: Always
+          image: wordpress
           env:
             - name: WORDPRESS_DB_HOST
               value: mysql-svc

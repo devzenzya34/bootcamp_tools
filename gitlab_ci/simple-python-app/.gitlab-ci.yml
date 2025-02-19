@@ -1,0 +1,100 @@
+variables:
+  APP_NAME: simple-python-app
+  APP_CONTAINER_PORT: "8080"
+  APP_EXPOSED80_PORT: "8080"
+  APP_CONTAINER_NAME: python-app
+  DOKKU_APP_STG: "python-app-staging"
+  DOKKU_APP_PORD: "python-app-production"
+  DOKKU_DOMAIN: "dokku.me"
+
+image: docker:latest
+services:
+  - name: docker:dind
+  - alias: docker
+
+stages:
+  - build
+  - test-acceptation
+  - release image
+  - deploy review
+  - stop review
+  - deploy staging
+  - test staging
+  - deploy production
+  - test production
+
+## Job Template
+.test_template: &test
+  image: alpine
+  script:
+    - apk add --no-cache curl
+    - curl "http://$DOMAIN" | grep "Hello World"
+
+## Jobs
+docker-build:
+  stage: build
+  script:
+    - docker build -t ${APP_NAME} .
+    - docker save ${APP_NAME} > ${APP_NAME}.tar
+  artifacts:
+    paths:
+      - ${APP_NAME}.tar
+
+test-acceptation:
+  stage: test-acceptation
+  <<: *test_template
+  script:
+    - docker load -i ${APP_NAME}.tar # docker load < ${APP_NAME}.tar
+    - docker run -d -p ${APP_EXPOSED80_PORT}:${APP_CONTAINER_PORT} -e PORT=${APP_CONTAINER_PORT} --name ${APP_CONTAINER_NAME} ${APP_NAME}
+    - sleep 5
+    - apk --no-cache add curl
+    - curl "http://docker:${APP_CONTAINER_PORT}" | grep "Hello World"
+
+release-image:
+  stage: release image
+  image: docker:latest
+  script:
+    - docker load < ${APP_NAME}.tar
+    - docker tag ${APP_NAME} ${IMAGE_NAME}:${CI_COMMIT_REF_NAME}
+    - docker tag ${APP_NAME} ${IMAGE_NAME}:${CI_COMMIT__SHORT_SHA}
+    - docker login -u "$CI_REGISTRTY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker push "${IMAGE_NAME}:${CI_COMMIT_REF_NAME}"
+    - docker push "${IMAGE_NAME}:${CI_COMMIT__SHORT_SHA}"
+
+deploy-review:
+  stage: deploy review
+  environment:
+    name: review/${CI_COMMIT_REF_NAME}
+    url: https://${CI_COMMIT_REF_NAME}.gitlab.com
+    on_stop: stop review
+  only:
+    - merge_request
+  script:
+    dokku deploy review/${CI_COMMIT_REF_NAME}
+
+stop-review:
+  stage: stop review
+  variables:
+    GIT_STRATEGY: none
+  environment:
+    name: review/${CI_COMMIT_REF_NAME}
+    action: stop
+  when: manual
+  only:
+    - merge_request
+  script:
+    dokku destroy review/${CI_COMMIT_REF_NAME}
+
+test-staging:
+  stage: test staging
+  <<: *test_template
+  variables:
+   DOMAIN: ${DOKKU_APP_STG}.${DOKKU.DOMAIN}
+
+test-production:
+  stage: test production
+  <<: *test_template
+  only:
+    - master
+  variables:
+   DOMAIN: ${DOKKU_APP_PROD}.${DOKKU.DOMAIN}
