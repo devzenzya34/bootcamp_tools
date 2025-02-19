@@ -4,5 +4,5 @@ resources:
     - mysql/deploy-mysql.yml
     - mysql/pvc-mysql.yml
     - wordpress/service-wordpress.yml
-    - wordpress/deployment-wordpress.yml
+    - wordpress/deploy-wordpress.yml
     - wordpress/volume-wordpress.yml
