@@ -1,0 +1,7 @@
+### Namespace definition
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: wp-k8s
+status:
+  phase: Active
