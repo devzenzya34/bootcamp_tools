@@ -8,7 +8,7 @@ metadata:
         type: local
     namespace: k8s-wordpress
 spec:
-    ressources:
+    resources:
         requests:
             storage: 10Gi
     volumeMode: Filesystem

@@ -3,3 +3,7 @@ github correction
 https://github.com/ulrich-sun/mini-projet-kubernetes/
 
  site EAZYTraining
+
+ scp -r  /dossier/ user@ip-distante:/dossier-distant/
+
+ list all pods: kubectl get pods --namespace=k8s-wordpress

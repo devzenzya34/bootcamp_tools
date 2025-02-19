@@ -18,9 +18,7 @@ spec:
         tier: database
     spec:
       containers:
-        - name: mysql
-        - image: mysql:8.0
-          name: mysql
+        - name: mysiql
           env:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
