@@ -7,3 +7,6 @@ https://github.com/ulrich-sun/mini-projet-kubernetes/
  scp -r  /dossier/ user@ip-distante:/dossier-distant/
 
  list all pods: kubectl get pods --namespace=k8s-wordpress
+
+ POur utiliser l'adresse IP statique du serveur au lieu de l'adress de Minikube et accéder au service wordpress
+ on se connecte en ssh via cette commande : ssh -L 30001:192.168.49.2:30001 vagrant@192.168.56.42

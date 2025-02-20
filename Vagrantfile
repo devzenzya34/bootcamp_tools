@@ -16,6 +16,8 @@ Vagrant.configure("2") do |config|
     vbox.vm.hostname = "ubuntu-vm"
     vbox.vm.network "private_network", type: "static", ip: "192.168.56.42"
     vbox.vm.network "public_network", ip: "192.168.1.42", bridge: "enp3s0"
+    # Port forwarding for minikube
+    vbox.vm.network "forwarded_port", guest: 30001, host: 30001
     vbox.vm.provider "virtualbox" do |vb|
       vb.memory = "8192"
       vb.cpus = 4
