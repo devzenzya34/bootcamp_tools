@@ -1,0 +1,57 @@
+---
+- name: Update Os
+  apt:
+    update_cache: yes
+    upgrade: dist
+    
+- name: Install dependencies
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - gnupg-agent
+    - software-properties-common
+    - python3
+    - python3-pip
+    - lsb-release
+    - curl
+    - unzip
+
+- name: Add docker repository
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    update_cache: yes
+    state: present
+
+- name: Add gpg key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Install docker
+  package:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-compose
+      - docker-compose-plugin
+    state: latest
+    
+- name: Start docker
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Add User to docker group
+  user:
+    name: "{{ ansible_user }}"
+    groups: docker
+    append: yes
+  notify: restart docker
+
+  

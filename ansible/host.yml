@@ -1,0 +1,9 @@
+all:
+  children:
+    ubuntu:
+      hosts:
+        ubuntu-vm:
+    
+    centos:
+      hosts:
+        centos-vm:
