@@ -1,4 +1,6 @@
 .idea
 .vscode
 */.cache/*
-note.txt
+.vagrant
+/note.txt
+*/.vagrant/*

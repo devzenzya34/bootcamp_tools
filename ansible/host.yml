@@ -2,8 +2,8 @@ all:
   children:
     ubuntu:
       hosts:
-        ubuntu-vm:
+        ubuntu-server:
     
     centos:
       hosts:
-        centos-vm:
+        centos-server:

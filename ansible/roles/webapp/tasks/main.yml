@@ -2,6 +2,8 @@
 # tasks file for webapp
 - include_tasks: "docker-ubuntu.yml"
   when: ansible_distribution == "Ubuntu"
+- include_tasks: "docker-centos.yml"
+  when: ansible_distribution == "CentOS"
 ## add another distributions
 
 - name: Copy templatefile

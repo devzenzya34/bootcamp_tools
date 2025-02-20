@@ -1,6 +1,6 @@
 ---
-name: Install Apache Web Server
-hosts: all
-become: true
-roles:
-  - webapp
+- name: Install Apache Web Server
+  hosts: all
+  become: true
+  roles:
+    - webapp
