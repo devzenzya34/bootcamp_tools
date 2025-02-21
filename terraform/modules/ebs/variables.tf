@@ -15,5 +15,5 @@ variable "ebs_tag" {
   default = {
     Name = "EBS Volume"
   }
-  descrption = "The tags for the EBS volume"
+  description = "The tags for the EBS volume"
 }

@@ -6,3 +6,6 @@ Déployer une infra complète avec terraform
 - ecrire un module pour créer un security group
 - créer un dossier app qui va utiliser les 4 modules precedents
 - deploiement: installer nginx et enregistrer l'ip public dans un fichier ip_ec2.txt
+
+
+utilise aws cli pour configurer les Access Key
