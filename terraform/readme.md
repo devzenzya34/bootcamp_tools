@@ -9,3 +9,9 @@ Déployer une infra complète avec terraform
 
 
 utilise aws cli pour configurer les Access Key
+
+
+terraform init
+terraform fmt
+terraform validate
+terraform plan

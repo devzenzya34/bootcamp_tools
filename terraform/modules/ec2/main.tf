@@ -20,11 +20,8 @@ resource "aws_instance" "ec2" {
   security_groups = ["${var.security_group_name}"]
   key_name      = var.key_name
 
-  provisionner "remote_exec" {
-    inline = [
-      "sudo apt-get update",
-      "sudo apt-get install -y nginx",
-    ]
+  provisioner "remote-exec" {
+    script = "../app/files/install.sh"
     connection {
       type        = "ssh"
       user        = var.user
