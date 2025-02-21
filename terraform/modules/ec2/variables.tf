@@ -10,7 +10,7 @@ variable "key_name" {
   description = "The name of the key pair to use for SSH access to the instance"
 }
 
-variable "tags" {
+variable "instance_tag" {
   type = map(string)
   default = {
     Name = "ec2"
