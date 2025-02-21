@@ -26,7 +26,7 @@ resource "aws_instance" "ec2" {
       type        = "ssh"
       user        = var.user
       host        = self.public_ip
-      private_key = file("../app/files/${var.key_name}.pem")
+      private_key = file("/home/devzenzya/NobaraLab/AsDevops/Devops_camp/terraform/app/files/${var.key_name}.pem")
     }
   }
 

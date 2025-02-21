@@ -6,7 +6,7 @@ variable "instance_type" {
 
 variable "key_name" {
   type = string
-  default = "mini-terraform-key"
+  default = "terraform-mini-projet"
   description = "The name of the key pair to use for SSH access to the instance"
 }
 

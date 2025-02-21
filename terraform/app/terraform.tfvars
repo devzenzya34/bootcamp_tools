@@ -6,7 +6,7 @@ instance_tag        = {
     Name = "ec2.project"
   }
 instance_type       = "t2.medium"
-key_name            = "terraform-mini-project"
+key_name            = "terraform-mini-projet"
 user                = "ubuntu"
 ebs_zone            = "us-east-1a"
 ebs_size            = "10"

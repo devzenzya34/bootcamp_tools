@@ -24,7 +24,7 @@ module "ec2" {
   user                = var.user
   instance_type       = var.instance_type
   key_name            = var.key_name
-  security_group_name = module.security_group.security_group_id
+  security_group_name = module.security_group.security_group_name
 }
 
 module "eip" {
